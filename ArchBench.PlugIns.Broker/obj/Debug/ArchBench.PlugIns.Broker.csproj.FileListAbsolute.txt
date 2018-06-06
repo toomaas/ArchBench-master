@@ -1,0 +1,10 @@
+C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Broker\bin\Debug\ArchBench.PlugIns.Broker.dll
+C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Broker\bin\Debug\ArchBench.PlugIns.Broker.pdb
+C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Broker\bin\Debug\ArchBench.Core.dll
+C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Broker\bin\Debug\HttpServer.dll
+C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Broker\bin\Debug\ArchBench.Core.pdb
+C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Broker\bin\Debug\HttpServer.xml
+C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Broker\obj\Debug\ArchBench.PlugIns.Broker.csprojResolveAssemblyReference.cache
+C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Broker\obj\Debug\ArchBench.PlugIns.Broker.csproj.CoreCompileInputs.cache
+C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Broker\obj\Debug\ArchBench.PlugIns.Broker.dll
+C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Broker\obj\Debug\ArchBench.PlugIns.Broker.pdb
