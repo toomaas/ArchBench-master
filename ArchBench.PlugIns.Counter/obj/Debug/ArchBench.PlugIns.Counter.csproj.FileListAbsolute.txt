@@ -24,7 +24,8 @@ C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Counter\bi
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Counter\bin\Debug\HttpServer.dll
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Counter\bin\Debug\ArchBench.Core.pdb
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Counter\bin\Debug\HttpServer.xml
-C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Counter\obj\Debug\ArchBench.PlugIns.Counter.csprojResolveAssemblyReference.cache
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Counter\obj\Debug\ArchBench.PlugIns.Counter.csproj.CoreCompileInputs.cache
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Counter\obj\Debug\ArchBench.PlugIns.Counter.dll
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Counter\obj\Debug\ArchBench.PlugIns.Counter.pdb
+C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Counter\obj\Debug\ArchBench.PlugIns.Counter.csprojAssemblyReference.cache
+C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Counter\obj\Debug\ArchBench.PlugIns.Counter.csproj.CopyComplete

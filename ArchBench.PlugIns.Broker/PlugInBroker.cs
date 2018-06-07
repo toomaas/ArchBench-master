@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading;
@@ -100,10 +102,70 @@ namespace ArchBench.PlugIns.Broker
 
         #endregion
 
+        #region ProfSugestoes
+        private NameValueCollection GetFormValues(IHttpRequest aRequest)
+        {
+            NameValueCollection values = new NameValueCollection();
+            foreach (HttpInputItem item in aRequest.Form)
+            {
+                values.Add(item.Name, item.Value);
+            }
+            return values;
+        }
+
+        private string GetQueryString(IHttpRequest aRequest)
+        {
+            int count = aRequest.QueryString.Count();
+            if (count == 0) return "";
+
+            var parameters = new StringBuilder("?");
+            foreach (HttpInputItem item in aRequest.QueryString)
+            {
+                parameters.Append(String.Format("{0}={1}", item.Name, item.Value));
+                if (--count > 0) parameters.Append('&');
+            }
+            return parameters.ToString();
+        }
+
+        private void ForwardCookie(WebClient aClient, IHttpRequest aRequest)
+        {
+            if (aRequest.Headers["Cookie"] == null) return;
+            aClient.Headers.Add("Cookie", aRequest.Headers["Cookie"]);
+        }
+
+        private void BackwardCookie(WebClient aClient, IHttpResponse aResponse)
+        {
+            if (aClient.ResponseHeaders["Set-Cookie"] == null) return;
+            aResponse.AddHeader("Set-Cookie", aClient.ResponseHeaders["Set-Cookie"]);
+        }
+
+        #endregion
+
+
         #region IArchServerModulePlugIn Members
 
         public bool Process(IHttpRequest aRequest, IHttpResponse aResponse, IHttpSession aSession)
         {
+            WebClient client = new WebClient();
+
+            byte[] bytes = null;
+            var uri = aRequest.Uri.AbsoluteUri;
+            if (aRequest.Method == Method.Post)
+            {
+                bytes = client.UploadValues(uri, GetFormValues(aRequest));
+            }
+            else
+            {
+                bytes = client.DownloadData(uri);
+                Host.Logger.WriteLine(String.Format("Bytes"));
+                string download = Encoding.ASCII.GetString(bytes);
+                Console.WriteLine(download);
+            }
+
+            //StreamWriter writer = new StreamWriter(aResponse.Body,client.Encoding);
+            //writer.Write(client.Encoding.GetString(bytes));
+   
+
             if (mServers.Count == 0) return false;
             mNextServer = (mNextServer + 1) % mServers.Count;
 
@@ -113,7 +175,8 @@ namespace ArchBench.PlugIns.Broker
             redirection.AppendFormat("http://{0}:{1}", mServers[mNextServer].Key, mServers[mNextServer].Value);
             redirection.Append(aRequest.Uri.AbsolutePath);
 
-            int count = aRequest.QueryString.Count();
+            redirection.Append(GetQueryString(aRequest));
+            /*int count = aRequest.QueryString.Count();
             if (count > 0)
             {
                 redirection.Append('?');
@@ -122,9 +185,9 @@ namespace ArchBench.PlugIns.Broker
                     redirection.Append(String.Format("{0}={1}", item.Name, item.Value));
                     if (--count > 0) redirection.Append('&');
                 }
-            }
+            }*/
 
-            aResponse.Redirect(redirection.ToString());
+            //aResponse.Redirect(redirection.ToString());
 
             return true;
         }

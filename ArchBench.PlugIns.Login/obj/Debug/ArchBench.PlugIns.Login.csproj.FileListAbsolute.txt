@@ -16,9 +16,10 @@ C:\Users\leonel.nobrega\Source\Repos\ArchBench\ArchBench.PlugIns.Login\obj\Debug
 C:\Users\leonel.nobrega\Source\Repos\ArchBench\ArchBench.PlugIns.Login\obj\Debug\ArchBench.PlugIns.Login.pdb
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns\Debug\ArchBench.PlugIns.Login.dll
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns\Debug\ArchBench.PlugIns.Login.pdb
-C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Login\obj\Debug\ArchBench.PlugIns.Login.csprojResolveAssemblyReference.cache
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Login\obj\Debug\ArchBench.PlugIns.Login.Resource.resources
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Login\obj\Debug\ArchBench.PlugIns.Login.csproj.GenerateResource.Cache
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Login\obj\Debug\ArchBench.PlugIns.Login.csproj.CoreCompileInputs.cache
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Login\obj\Debug\ArchBench.PlugIns.Login.dll
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Login\obj\Debug\ArchBench.PlugIns.Login.pdb
+C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Login\obj\Debug\ArchBench.PlugIns.Login.csprojAssemblyReference.cache
+C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Login\obj\Debug\ArchBench.PlugIns.Login.csproj.CopyComplete

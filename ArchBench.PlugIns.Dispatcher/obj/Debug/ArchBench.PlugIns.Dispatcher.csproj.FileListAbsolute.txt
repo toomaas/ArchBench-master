@@ -12,7 +12,8 @@ C:\Users\leonel.nobrega\Source\Repos\ArchBench\ArchBench.PlugIns.Dispatcher\obj\
 C:\Users\leonel.nobrega\Source\Repos\ArchBench\ArchBench.PlugIns.Dispatcher\obj\Debug\ArchBench.PlugIns.Dispatcher.pdb
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns\Debug\ArchBench.PlugIns.Dispatcher.dll
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns\Debug\ArchBench.PlugIns.Dispatcher.pdb
-C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Dispatcher\obj\Debug\ArchBench.PlugIns.Dispatcher.csprojResolveAssemblyReference.cache
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Dispatcher\obj\Debug\ArchBench.PlugIns.Dispatcher.csproj.CoreCompileInputs.cache
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Dispatcher\obj\Debug\ArchBench.PlugIns.Dispatcher.dll
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Dispatcher\obj\Debug\ArchBench.PlugIns.Dispatcher.pdb
+C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Dispatcher\obj\Debug\ArchBench.PlugIns.Dispatcher.csprojAssemblyReference.cache
+C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Dispatcher\obj\Debug\ArchBench.PlugIns.Dispatcher.csproj.CopyComplete

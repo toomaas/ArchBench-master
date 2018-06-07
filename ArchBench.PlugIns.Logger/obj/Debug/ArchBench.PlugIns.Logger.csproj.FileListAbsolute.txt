@@ -12,7 +12,8 @@ C:\Users\leonel.nobrega\Source\Repos\ArchBench\ArchBench.PlugIns.Logger\obj\Debu
 C:\Users\leonel.nobrega\Source\Repos\ArchBench\ArchBench.PlugIns.Logger\obj\Debug\ArchBench.PlugIns.Logger.pdb
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns\Debug\ArchBench.PlugIns.Logger.dll
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns\Debug\ArchBench.PlugIns.Logger.pdb
-C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Logger\obj\Debug\ArchBench.PlugIns.Logger.csprojResolveAssemblyReference.cache
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Logger\obj\Debug\ArchBench.PlugIns.Logger.csproj.CoreCompileInputs.cache
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Logger\obj\Debug\ArchBench.PlugIns.Logger.dll
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Logger\obj\Debug\ArchBench.PlugIns.Logger.pdb
+C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Logger\obj\Debug\ArchBench.PlugIns.Logger.csprojAssemblyReference.cache
+C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Logger\obj\Debug\ArchBench.PlugIns.Logger.csproj.CopyComplete

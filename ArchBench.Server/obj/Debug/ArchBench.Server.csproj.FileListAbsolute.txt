@@ -81,7 +81,6 @@ C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.Server\bin\Debug\A
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.Server\bin\Debug\HttpServer.dll
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.Server\bin\Debug\ArchBench.Core.pdb
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.Server\bin\Debug\HttpServer.xml
-C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.Server\obj\Debug\ArchBench.Server.csprojResolveAssemblyReference.cache
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.Server\obj\Debug\ArchBench.Server.ArchServerForm.resources
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.Server\obj\Debug\ArchBench.Server.PlugInsForm.resources
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.Server\obj\Debug\ArchBench.Server.Properties.Resources.resources
@@ -89,3 +88,5 @@ C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.Server\obj\Debug\A
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.Server\obj\Debug\ArchBench.Server.csproj.CoreCompileInputs.cache
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.Server\obj\Debug\ArchBench.Server.exe
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.Server\obj\Debug\ArchBench.Server.pdb
+C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.Server\obj\Debug\ArchBench.Server.csprojAssemblyReference.cache
+C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.Server\obj\Debug\ArchBench.Server.csproj.CopyComplete
