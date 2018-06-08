@@ -9,3 +9,5 @@ C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Broker\obj
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Broker\obj\Debug\ArchBench.PlugIns.Broker.pdb
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Broker\obj\Debug\ArchBench.PlugIns.Broker.csprojAssemblyReference.cache
 C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns.Broker\obj\Debug\ArchBench.PlugIns.Broker.csproj.CopyComplete
+C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns\Debug\ArchBench.PlugIns.Broker.dll
+C:\Users\joaquimtomas\source\repos\ArchBench-master\ArchBench.PlugIns\Debug\ArchBench.PlugIns.Broker.pdb

@@ -102,6 +102,63 @@ namespace ArchBench.PlugIns.Broker
 
         #endregion
 
+
+        #region IArchServerModulePlugIn Members
+
+        public bool Process(IHttpRequest aRequest, IHttpResponse aResponse, IHttpSession aSession)
+        {
+            WebClient client = new WebClient();
+
+            if (mServers.Count == 0) return false;
+            mNextServer = (mNextServer + 1) % mServers.Count;
+
+            Host.Logger.WriteLine(String.Format("Broker to server on port {0}", mServers[mNextServer]));
+
+            var uri = new StringBuilder();
+            uri.AppendFormat("http://{0}:{1}", mServers[mNextServer].Key, mServers[mNextServer].Value);
+            uri.Append(aRequest.Uri.AbsolutePath);
+            uri.Append(GetQueryString(aRequest));
+
+            //IDictionary<string,ICollection<string>> Assignments = new Dictionary<string, ICollection<string>>();
+            IDictionary<string, string> servers = new Dictionary<string, string>();
+            Console.WriteLine(client.BaseAddress.S);
+
+                byte[] bytes = null;
+            if (aRequest.Method == Method.Post)
+            {
+                ForwardCookie(client, aRequest);
+                bytes = client.UploadValues(uri.ToString(), GetFormValues(aRequest));   
+            }
+            else
+            {
+                ForwardCookie(client, aRequest);
+                bytes = client.DownloadData(uri.ToString());
+                BackwardCookie(client,aResponse);
+            }
+
+
+           
+
+                aResponse.ContentType = client.ResponseHeaders[HttpResponseHeader.ContentType];
+            if (aResponse.ContentType.StartsWith("text/html"))
+            {
+                var writer = new StreamWriter(aResponse.Body, client.Encoding);
+                string download = client.Encoding.GetString(bytes);
+                //StreamWriter writer = new StreamWriter(aResponse.Body,client.Encoding);
+                //writer.Write(client.Encoding.GetString(bytes));
+                writer.WriteLine(download);
+                writer.Flush();
+            }
+            else
+            {
+                aResponse.Body.Write(bytes, 0, bytes.Length);
+            }
+
+            return true;
+        }
+
+        #endregion
+
         #region ProfSugestoes
         private NameValueCollection GetFormValues(IHttpRequest aRequest)
         {
@@ -137,59 +194,6 @@ namespace ArchBench.PlugIns.Broker
         {
             if (aClient.ResponseHeaders["Set-Cookie"] == null) return;
             aResponse.AddHeader("Set-Cookie", aClient.ResponseHeaders["Set-Cookie"]);
-        }
-
-        #endregion
-
-
-        #region IArchServerModulePlugIn Members
-
-        public bool Process(IHttpRequest aRequest, IHttpResponse aResponse, IHttpSession aSession)
-        {
-            WebClient client = new WebClient();
-
-            byte[] bytes = null;
-            var uri = aRequest.Uri.AbsoluteUri;
-            if (aRequest.Method == Method.Post)
-            {
-                bytes = client.UploadValues(uri, GetFormValues(aRequest));
-            }
-            else
-            {
-                bytes = client.DownloadData(uri);
-                Host.Logger.WriteLine(String.Format("Bytes"));
-                string download = Encoding.ASCII.GetString(bytes);
-                Console.WriteLine(download);
-            }
-
-            //StreamWriter writer = new StreamWriter(aResponse.Body,client.Encoding);
-            //writer.Write(client.Encoding.GetString(bytes));
-   
-
-            if (mServers.Count == 0) return false;
-            mNextServer = (mNextServer + 1) % mServers.Count;
-
-            Host.Logger.WriteLine(String.Format("Dispatching to server on port {0}", mServers[mNextServer]));
-
-            var redirection = new StringBuilder();
-            redirection.AppendFormat("http://{0}:{1}", mServers[mNextServer].Key, mServers[mNextServer].Value);
-            redirection.Append(aRequest.Uri.AbsolutePath);
-
-            redirection.Append(GetQueryString(aRequest));
-            /*int count = aRequest.QueryString.Count();
-            if (count > 0)
-            {
-                redirection.Append('?');
-                foreach (HttpInputItem item in aRequest.QueryString)
-                {
-                    redirection.Append(String.Format("{0}={1}", item.Name, item.Value));
-                    if (--count > 0) redirection.Append('&');
-                }
-            }*/
-
-            //aResponse.Redirect(redirection.ToString());
-
-            return true;
         }
 
         #endregion
