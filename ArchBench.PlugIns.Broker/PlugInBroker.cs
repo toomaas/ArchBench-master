@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -17,6 +18,7 @@ namespace ArchBench.PlugIns.Broker
         private readonly TcpListener mListener;
         private int mNextServer;
         private Thread mRegisterThread;
+        IDictionary<string, List<string>> Assignments = new Dictionary<string,List<string>>();
 
         public PlugInBroker()
         {
@@ -110,50 +112,121 @@ namespace ArchBench.PlugIns.Broker
             WebClient client = new WebClient();
 
             if (mServers.Count == 0) return false;
-            mNextServer = (mNextServer + 1) % mServers.Count;
-
-            Host.Logger.WriteLine(String.Format("Broker to server on port {0}", mServers[mNextServer]));
-
+            ForwardCookie(client, aRequest);
+            //Host.Logger.WriteLine(String.Format("Broker to server on port {0}", mServers[mNextServer]));
             var uri = new StringBuilder();
-            uri.AppendFormat("http://{0}:{1}", mServers[mNextServer].Key, mServers[mNextServer].Value);
+
+            //IDictionary<string,ICollection<string>> Assignments = new Dictionary<string, ICollection<string>>();
+            //if(client.Headers["Cookie"] != null)
+            if (aRequest.Headers["Cookie"] != null)
+            {
+                if (Assignments.ContainsKey(aRequest.Headers["Cookie"]))
+                {
+                    List<String> assignmentValues = Assignments[aRequest.Headers["Cookie"]];
+                    uri.AppendFormat("http://{0}:{1}", assignmentValues[0], assignmentValues[1]);
+
+                }
+                else
+                {
+                    mNextServer = (mNextServer + 1) % mServers.Count;
+                    /*List<String> listaIpPort = new List<string>();
+                    listaIpPort.Add(mServers[mNextServer].Key);
+                    listaIpPort.Add(mServers[mNextServer].Value.ToString());
+
+                    Assignments.Add(aRequest.Headers["Cookie"], listaIpPort);*/
+                    uri.AppendFormat("http://{0}:{1}", mServers[mNextServer].Key, mServers[mNextServer].Value);
+                }
+            }
+            else
+            {
+                mNextServer = (mNextServer + 1) % mServers.Count;
+                uri.AppendFormat("http://{0}:{1}", mServers[mNextServer].Key, mServers[mNextServer].Value);
+            }
+            
+            //mNextServer = (mNextServer + 1) % mServers.Count;
+            //uri.AppendFormat("http://{0}:{1}", mServers[mNextServer].Key, mServers[mNextServer].Value);
             uri.Append(aRequest.Uri.AbsolutePath);
             uri.Append(GetQueryString(aRequest));
 
-            //IDictionary<string,ICollection<string>> Assignments = new Dictionary<string, ICollection<string>>();
-            IDictionary<string, string> servers = new Dictionary<string, string>();
-            Console.WriteLine(client.BaseAddress.S);
-
-                byte[] bytes = null;
+            
+            byte[] bytes = null;
             if (aRequest.Method == Method.Post)
             {
-                ForwardCookie(client, aRequest);
-                bytes = client.UploadValues(uri.ToString(), GetFormValues(aRequest));   
+                bytes = client.UploadValues(uri.ToString(), GetFormValues(aRequest));
             }
             else
             {
-                ForwardCookie(client, aRequest);
-                bytes = client.DownloadData(uri.ToString());
-                BackwardCookie(client,aResponse);
+                try
+                {
+                    bytes = client.DownloadData(uri.ToString());
+                }
+                catch(Exception e) { Console.WriteLine("404");}
             }
+            
+            string clientHeader = "";
+            try
+            {
+                clientHeader = client.Headers["Cookie"];
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            BackwardCookie(client, aResponse);
+            try
+            {
+                string[] chaves = client.ResponseHeaders.AllKeys;
+                bool chaveExists = false;
+                string[] s = new string[2];
+                foreach (var chave in chaves)
+                {
+                    if (chave.Equals("Set-Cookie"))
+                    {
+                        chaveExists = true;
+                         s = client.ResponseHeaders["Set-Cookie"].Split(';');
+                    }
+                }
+                if (chaveExists)
+                {
+                    if (!Assignments.ContainsKey(s[0]))
+                    {
+                        List<String> listaIpPort = new List<string>();
+                        listaIpPort.Add(mServers[mNextServer].Key);
+                        listaIpPort.Add(mServers[mNextServer].Value.ToString());
+
+                        Assignments.Add(s[0], listaIpPort);
+                    }
+                }
+            }catch(Exception e) { Console.WriteLine("erro headers");}
 
 
-           
-
+            try
+            {
                 aResponse.ContentType = client.ResponseHeaders[HttpResponseHeader.ContentType];
-            if (aResponse.ContentType.StartsWith("text/html"))
-            {
-                var writer = new StreamWriter(aResponse.Body, client.Encoding);
-                string download = client.Encoding.GetString(bytes);
-                //StreamWriter writer = new StreamWriter(aResponse.Body,client.Encoding);
-                //writer.Write(client.Encoding.GetString(bytes));
-                writer.WriteLine(download);
-                writer.Flush();
+                if (aResponse.ContentType.StartsWith("text/html"))
+                {
+                    var writer = new StreamWriter(aResponse.Body, client.Encoding);
+                    string download = client.Encoding.GetString(bytes);
+                    writer.WriteLine(download);
+                    writer.Flush();
+                     foreach (var assignment in Assignments)
+                     {
+                         List<String> vals = assignment.Value;
+                         writer.WriteLine("<br>Chave: " + assignment.Key + "  IP: " + vals[0] + " Port: " + vals[1]);
+                     }
+                    writer.WriteLine("<br> Client.Headers['Cookie']:  " + clientHeader);
+                    writer.Flush();
+                    
+                }
+                else
+                {
+                    aResponse.Body.Write(bytes, 0, bytes.Length);
+                }
             }
-            else
+            catch (Exception e)
             {
-                aResponse.Body.Write(bytes, 0, bytes.Length);
-            }
 
+            }
             return true;
         }
 
@@ -192,8 +265,18 @@ namespace ArchBench.PlugIns.Broker
 
         private void BackwardCookie(WebClient aClient, IHttpResponse aResponse)
         {
-            if (aClient.ResponseHeaders["Set-Cookie"] == null) return;
-            aResponse.AddHeader("Set-Cookie", aClient.ResponseHeaders["Set-Cookie"]);
+            try
+            {
+                if (aClient.ResponseHeaders.HasKeys())
+                {
+                    if (aClient.ResponseHeaders["Set-Cookie"] == null) return;
+                    aResponse.AddHeader("Set-Cookie", aClient.ResponseHeaders["Set-Cookie"]);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
 
         #endregion

@@ -33,9 +33,24 @@ namespace ArchBench.PlugIns.Login
 
                 if ( aRequest.Uri.AbsolutePath.StartsWith("/user/login") )
                 {
-                    StreamWriter writer = new StreamWriter(aResponse.Body);
-                    writer.Write(Resource.login);
-                    writer.Flush();
+                    if (aSession["Username"] == null)
+                    {
+                        StreamWriter writer = new StreamWriter(aResponse.Body);
+                        writer.Write(Resource.login);
+                        writer.Flush();
+                    }
+                    else
+                    {
+                        Host.Logger.WriteLine("User [{0}] logged on.", aSession["Username"]);
+
+                        var writer = new StreamWriter(aResponse.Body);
+                        writer.WriteLine("<p>User <strong>{0}</strong> logged on.</p>", aSession["Username"]);
+                        writer.Flush();
+                        writer.WriteLine("<a href=\"/user/logout/\">Logout</a>");
+                        writer.Flush();
+                        return true;
+
+                    }
 
                     return true;
                 }
